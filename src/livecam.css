@@ -1,0 +1,46 @@
+@keyframes fadey {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+figure#slideshow {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+figure#slideshow div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+}
+figure#slideshow div p {
+  position: absolute;
+  width: 100%;
+  bottom: 4%;
+  text-align: center;
+  z-index: 100;
+  text-shadow: 2px 2px 4px #000000;
+  line-height: 150%;
+  font-size: 80%;
+}
+figure#slideshow div:first-child {
+  position: relative;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
