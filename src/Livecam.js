@@ -21,7 +21,7 @@ class Livecam extends Component {
       <div key={livecam.title}>
         <img
           style={{ width: "100%" }}
-          src={`https://images.webcams.travel/thumbnail/${livecam.id}.jpg`}
+          src={`https://images.webcams.travel/preview/${livecam.id}.jpg`}
           alt={livecam.title}
         />
         <p>
