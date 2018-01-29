@@ -20,7 +20,6 @@ class Livecam extends Component {
     const allLivecams = this.props.livecams.map(livecam => (
       <div key={livecam.title}>
         <img
-          style={{ width: "100%" }}
           src={`https://images.webcams.travel/preview/${livecam.id}.jpg`}
           alt={livecam.title}
         />

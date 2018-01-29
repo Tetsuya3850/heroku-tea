@@ -16,6 +16,7 @@ figure#slideshow {
   width: 100%;
   margin: 0 auto;
   position: relative;
+  top: -25px;
 }
 figure#slideshow div {
   position: absolute;
@@ -24,6 +25,9 @@ figure#slideshow div {
   width: 100%;
   height: auto;
   opacity: 0;
+}
+figure#slideshow div img {
+  width: 100%;
 }
 figure#slideshow div p {
   position: absolute;
