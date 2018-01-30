@@ -16,7 +16,6 @@ figure#slideshow {
   width: 100%;
   margin: 0 auto;
   position: relative;
-  top: -25px;
 }
 figure#slideshow div {
   position: absolute;
@@ -28,11 +27,12 @@ figure#slideshow div {
 }
 figure#slideshow div img {
   width: 100%;
+  clip-path: polygon(0% 10%, 100% 10%, 100% 88%, 0% 88%);
 }
 figure#slideshow div p {
   position: absolute;
   width: 100%;
-  bottom: 4%;
+  bottom: 10%;
   text-align: center;
   z-index: 100;
   text-shadow: 2px 2px 4px #000000;
