@@ -22,13 +22,19 @@ class LivecamContainer extends Component {
     this.reload();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.slideshowinterval);
+    clearInterval(this.flagOnOffinterval);
+    clearInterval(this.reloadinterval);
+  }
+
   slideshow() {
     const imgs = document.getElementById("slideshow").children;
     const interval = 12000;
     let currentPic = 0;
     imgs[currentPic].style.webkitAnimation = "fadey " + interval + "ms";
     imgs[currentPic].style.animation = "fadey " + interval + "ms";
-    setInterval(() => {
+    this.slideshowinterval = setInterval(() => {
       imgs[currentPic].removeAttribute("style");
       if (currentPic === imgs.length - 1) {
         currentPic = 0;
@@ -41,7 +47,7 @@ class LivecamContainer extends Component {
   }
 
   flagOnOff() {
-    setInterval(() => {
+    this.flagOnOffinterval = setInterval(() => {
       Client.showCam(bool => {
         const container = document.getElementById("container");
         if (bool === "1") {
@@ -54,7 +60,7 @@ class LivecamContainer extends Component {
   }
 
   reload() {
-    setInterval(() => {
+    this.reloadinterval = setInterval(() => {
       window.location.reload();
     }, 600000);
   }
