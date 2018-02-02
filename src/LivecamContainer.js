@@ -18,13 +18,13 @@ class LivecamContainer extends Component {
 
   componentDidUpdate() {
     this.slideshow();
-    this.flagOnOff();
+    /*this.flagOnOff();*/
     this.reload();
   }
 
   componentWillUnmount() {
     clearInterval(this.slideshowinterval);
-    clearInterval(this.flagOnOffinterval);
+    /*clearInterval(this.flagOnOffinterval);*/
     clearInterval(this.reloadinterval);
   }
 
@@ -62,7 +62,7 @@ class LivecamContainer extends Component {
   reload() {
     this.reloadinterval = setInterval(() => {
       window.location.reload();
-    }, 600000);
+    }, 1200000);
   }
 
   render() {
