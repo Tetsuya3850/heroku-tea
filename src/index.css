@@ -4,4 +4,5 @@ body {
   font-family: "Times New Roman", "sans-serif";
   background-color: black;
   color: white;
+  touch-action: none;
 }
