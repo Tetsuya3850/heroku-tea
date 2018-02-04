@@ -33,7 +33,7 @@ class LivecamContainer extends Component {
 
   slideshow() {
     const imgs = document.getElementById("slideshow").children;
-    const interval = 12000;
+    const interval = 15000;
     let currentPic = 0;
     imgs[currentPic].style.webkitAnimation = "fadey " + interval + "ms";
     imgs[currentPic].style.animation = "fadey " + interval + "ms";
