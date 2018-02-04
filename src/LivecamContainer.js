@@ -8,7 +8,7 @@ class LivecamContainer extends Component {
     this.state = {
       loading: true
     };
-    Client.subscribeToTimer(bool => this.flagOnOff(bool));
+    Client.subscribeToTimer(bool => this.delayFlag(bool));
   }
 
   componentDidMount() {
@@ -56,6 +56,10 @@ class LivecamContainer extends Component {
     } else {
       container.style.display = "none";
     }
+  }
+
+  delayFlag(bool) {
+    setTimeout(this.flagOnOff, this.props.match.params.hour * 1000, bool);
   }
 
   reload() {
