@@ -45,8 +45,8 @@ async function showCam(success) {
 }
 
 function subscribeToTimer(cb) {
-  socket.on("timer", timestamp => cb(null, timestamp));
-  socket.emit("subscribeToTimer", 8000);
+  socket.on("flag", bool => cb(bool));
+  socket.emit("subscribeToFlag", 8000);
 }
 
 const Client = { liveCamSearch, showCam, subscribeToTimer };

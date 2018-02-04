@@ -8,10 +8,11 @@ class LivecamContainer extends Component {
     this.state = {
       loading: true
     };
-    Client.subscribeToTimer((err, bool) => this.flagOnOff(bool));
+    Client.subscribeToTimer(bool => this.flagOnOff(bool));
   }
 
   componentDidMount() {
+    Client.showCam(bool => this.flagOnOff(bool));
     Client.liveCamSearch(livecams => {
       this.setState({ loading: false, livecams });
     }, this.props.match.params.hour);
@@ -22,7 +23,6 @@ class LivecamContainer extends Component {
 
   componentDidUpdate() {
     this.slideshow();
-    Client.showCam(bool => this.flagOnOff(bool));
     this.reload();
   }
 
@@ -65,7 +65,11 @@ class LivecamContainer extends Component {
   }
 
   render() {
-    return <Livecam {...this.state} />;
+    return (
+      <div id="container">
+        <Livecam {...this.state} />
+      </div>
+    );
   }
 }
 

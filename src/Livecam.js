@@ -31,7 +31,7 @@ class Livecam extends Component {
     ));
 
     return (
-      <div id="container">
+      <div>
         <figure id="slideshow">{allLivecams}</figure>
       </div>
     );
