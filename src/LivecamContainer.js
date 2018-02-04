@@ -8,6 +8,7 @@ class LivecamContainer extends Component {
     this.state = {
       loading: true
     };
+    Client.subscribeToTimer((err, bool) => this.flagOnOff(bool));
   }
 
   componentDidMount() {
@@ -21,13 +22,12 @@ class LivecamContainer extends Component {
 
   componentDidUpdate() {
     this.slideshow();
-    /*this.flagOnOff();*/
+    Client.showCam(bool => this.flagOnOff(bool));
     this.reload();
   }
 
   componentWillUnmount() {
     clearInterval(this.slideshowinterval);
-    /*clearInterval(this.flagOnOffinterval);*/
     clearInterval(this.reloadinterval);
   }
 
@@ -49,17 +49,13 @@ class LivecamContainer extends Component {
     }, interval);
   }
 
-  flagOnOff() {
-    this.flagOnOffinterval = setInterval(() => {
-      Client.showCam(bool => {
-        const container = document.getElementById("container");
-        if (bool === "1") {
-          container.style.display = "block";
-        } else {
-          container.style.display = "none";
-        }
-      });
-    }, 8000);
+  flagOnOff(bool) {
+    const container = document.getElementById("container");
+    if (bool === "1") {
+      container.style.display = "block";
+    } else {
+      container.style.display = "none";
+    }
   }
 
   reload() {

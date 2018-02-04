@@ -1,5 +1,7 @@
 import { livecamSeed, livecamOffset } from "./livecamSeed";
 import { calcLocalOffset } from "./utils";
+import openSocket from "socket.io-client";
+const socket = openSocket("http://localhost:5150");
 
 async function liveCamSearch(cb, hour) {
   try {
@@ -42,5 +44,10 @@ async function showCam(success) {
   }
 }
 
-const Client = { liveCamSearch, showCam };
+function subscribeToTimer(cb) {
+  socket.on("timer", timestamp => cb(null, timestamp));
+  socket.emit("subscribeToTimer", 8000);
+}
+
+const Client = { liveCamSearch, showCam, subscribeToTimer };
 export default Client;
