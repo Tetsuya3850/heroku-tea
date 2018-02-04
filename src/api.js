@@ -45,7 +45,6 @@ async function showCam(success) {
 }
 
 function subscribeToTimer(cb) {
-  socket.emit("subscribeToFlag", 1000);
   socket.on("flag", bool => cb(bool));
 }
 
