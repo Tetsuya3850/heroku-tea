@@ -1,7 +1,7 @@
 import { livecamSeed, livecamOffset } from "./livecamSeed";
 import { calcLocalOffset } from "./utils";
 import openSocket from "socket.io-client";
-const socket = openSocket("https://flag-tea.herokuapp.com/");
+const socket = openSocket("http://localhost:57032/");
 
 async function liveCamSearch(cb, hour) {
   try {
