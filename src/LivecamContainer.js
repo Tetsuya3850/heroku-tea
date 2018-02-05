@@ -59,7 +59,7 @@ class LivecamContainer extends Component {
   }
 
   delayFlag(bool) {
-    setTimeout(this.flagOnOff, this.props.match.params.hour * 1000, bool);
+    setTimeout(this.flagOnOff, this.props.match.params.hour * 500, bool);
   }
 
   reload() {
