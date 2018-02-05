@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Client from "./api";
+import { liveCamSearch, showCam, subscribeToFlag } from "./api";
 import Livecam from "./Livecam";
 
 class LivecamContainer extends Component {
@@ -8,12 +8,12 @@ class LivecamContainer extends Component {
     this.state = {
       loading: true
     };
-    Client.subscribeToFlag(bool => this.delayFlag(bool));
+    subscribeToFlag(bool => this.delayFlag(bool));
   }
 
   componentDidMount() {
-    Client.showCam(bool => this.flagOnOff(bool));
-    Client.liveCamSearch(livecams => {
+    showCam(bool => this.flagOnOff(bool));
+    liveCamSearch(livecams => {
       this.setState({ loading: false, livecams });
     }, this.props.match.params.hour);
     document.ontouchmove = function(event) {

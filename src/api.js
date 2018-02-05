@@ -3,7 +3,7 @@ import { calcLocalOffset } from "./utils";
 import openSocket from "socket.io-client";
 const socket = openSocket("https://flag-tea.herokuapp.com/");
 
-async function liveCamSearch(cb, hour) {
+export async function liveCamSearch(cb, hour) {
   try {
     const response = await fetch(
       `https://webcamstravel.p.mashape.com/webcams/list/webcam=${
@@ -34,7 +34,7 @@ async function liveCamSearch(cb, hour) {
   }
 }
 
-async function showCam(success) {
+export async function showCam(success) {
   try {
     const show = await fetch("https://flag-tea.herokuapp.com/flag");
     const bool = await show.json();
@@ -44,9 +44,6 @@ async function showCam(success) {
   }
 }
 
-function subscribeToFlag(cb) {
+export function subscribeToFlag(cb) {
   socket.on("flag", bool => cb(bool));
 }
-
-const Client = { liveCamSearch, showCam, subscribeToFlag };
-export default Client;
