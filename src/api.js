@@ -44,10 +44,9 @@ async function showCam(success) {
   }
 }
 
-function subscribeToTimer(cb) {
-  socket.emit("subscribeToFlag", 1000);
+function subscribeToFlag(cb) {
   socket.on("flag", bool => cb(bool));
 }
 
-const Client = { liveCamSearch, showCam, subscribeToTimer };
+const Client = { liveCamSearch, showCam, subscribeToFlag };
 export default Client;

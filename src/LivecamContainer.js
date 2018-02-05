@@ -8,7 +8,7 @@ class LivecamContainer extends Component {
     this.state = {
       loading: true
     };
-    Client.subscribeToTimer(bool => this.delayFlag(bool));
+    Client.subscribeToFlag(bool => this.delayFlag(bool));
   }
 
   componentDidMount() {
