@@ -6,7 +6,6 @@ import {
   most_frequent
 } from "./utils";
 import openSocket from "socket.io-client";
-const socket = openSocket("https://flag-tea.herokuapp.com/");
 
 export async function liveCamSearch(cb, hour) {
   try {
@@ -38,8 +37,6 @@ export async function liveCamSearch(cb, hour) {
       livecams.push(livecam);
       hours.push(local_hour);
     });
-    console.log(hours);
-    console.log(most_frequent(hours));
     cb(livecams, most_frequent(hours));
   } catch (err) {
     console.log(err);
@@ -57,5 +54,6 @@ export async function showCam(success) {
 }
 
 export function subscribeToFlag(cb) {
+  const socket = openSocket("https://flag-tea.herokuapp.com/");
   socket.on("flag", bool => cb(bool));
 }

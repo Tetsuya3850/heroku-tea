@@ -48,6 +48,11 @@ export function getHours() {
   return d.getHours();
 }
 
+export function getMinutes() {
+  const d = new Date();
+  return d.getMinutes();
+}
+
 export function mod(n, m) {
   return (n % m + m) % m;
 }

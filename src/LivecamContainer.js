@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { liveCamSearch, showCam, subscribeToFlag } from "./api";
 import Livecam from "./Livecam";
-import { mod } from "./utils";
+import { mod, getMinutes } from "./utils";
+
+let socket_open = false;
 
 class LivecamContainer extends Component {
   constructor(props) {
@@ -24,11 +26,13 @@ class LivecamContainer extends Component {
 
   componentDidUpdate() {
     this.slideshow();
+    /*this.socketHandler();*/
     this.reload();
   }
 
   componentWillUnmount() {
     clearInterval(this.slideshowinterval);
+    /*clearInterval(this.socketHandleInterval);*/
     clearInterval(this.reloadinterval);
   }
 
@@ -50,6 +54,19 @@ class LivecamContainer extends Component {
     }, interval);
   }
 
+  socketHandler() {
+    if (!socket_open && getMinutes() < 20) {
+      subscribeToFlag(bool => this.delayFlag(bool));
+      socket_open = true;
+    }
+    this.socketHandleInterval = setInterval(() => {
+      if (!socket_open && getMinutes() < 20) {
+        subscribeToFlag(bool => this.delayFlag(bool));
+        socket_open = true;
+      }
+    }, 300000);
+  }
+
   flagOnOff(bool) {
     const container = document.getElementById("container");
     if (bool === "1") {
@@ -69,7 +86,6 @@ class LivecamContainer extends Component {
     if (this.props.match.params.hour === "12") {
       delay += 1;
     }
-    console.log(mod(delay, 12));
     setTimeout(this.flagOnOff, mod(delay, 12) * 300, bool);
   }
 
