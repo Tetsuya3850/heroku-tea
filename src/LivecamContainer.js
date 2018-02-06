@@ -55,16 +55,16 @@ class LivecamContainer extends Component {
   }
 
   socketHandler() {
-    if (!socket_open && getMinutes() < 20) {
+    if (!socket_open && (getMinutes() < 15 || getMinutes() >= 56)) {
       subscribeToFlag(bool => this.delayFlag(bool));
       socket_open = true;
     }
     this.socketHandleInterval = setInterval(() => {
-      if (!socket_open && getMinutes() < 20) {
+      if (!socket_open && (getMinutes() < 15 || getMinutes() >= 56)) {
         subscribeToFlag(bool => this.delayFlag(bool));
         socket_open = true;
       }
-    }, 300000);
+    }, 60000);
   }
 
   flagOnOff(bool) {
