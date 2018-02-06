@@ -25,6 +25,14 @@ export function timeConverter(timestamp) {
   return time;
 }
 
+export function localHourGetter(timestamp) {
+  if (timestamp === 0) {
+    return false;
+  }
+  const a = new Date(timestamp * 1000);
+  return a.getHours();
+}
+
 export function calcLocalOffset() {
   const d = new Date();
   const tz = d
@@ -42,4 +50,21 @@ export function getHours() {
 
 export function mod(n, m) {
   return (n % m + m) % m;
+}
+
+export function most_frequent(array) {
+  if (array.length === 0) return null;
+  var modeMap = {};
+  var maxEl = array[0],
+    maxCount = 1;
+  for (var i = 0; i < array.length; i++) {
+    var el = array[i];
+    if (modeMap[el] === null) modeMap[el] = 1;
+    else modeMap[el]++;
+    if (modeMap[el] > maxCount) {
+      maxEl = el;
+      maxCount = modeMap[el];
+    }
+  }
+  return maxEl;
 }

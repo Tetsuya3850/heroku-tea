@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { liveCamSearch, showCam, subscribeToFlag } from "./api";
 import Livecam from "./Livecam";
-import { getHours, mod } from "./utils";
+import { mod } from "./utils";
 
 class LivecamContainer extends Component {
   constructor(props) {
@@ -14,8 +14,8 @@ class LivecamContainer extends Component {
 
   componentDidMount() {
     showCam(bool => this.flagOnOff(bool));
-    liveCamSearch(livecams => {
-      this.setState({ loading: false, livecams });
+    liveCamSearch((livecams, lHour) => {
+      this.setState({ loading: false, livecams, lHour });
     }, this.props.match.params.hour);
     document.ontouchmove = function(event) {
       event.preventDefault();
@@ -61,13 +61,12 @@ class LivecamContainer extends Component {
 
   delayFlag(bool) {
     let delay = null;
-    const japan_hours = Math.floor(getHours() / 2);
-    const hour = parseInt(this.props.match.params.hour, 10);
     if (bool === "1") {
-      delay = 2 - japan_hours + hour;
+      delay = 2 - Math.floor(this.state.lHour / 2);
     } else {
-      delay = 8 - japan_hours + hour;
+      delay = Math.floor(this.state.lHour / 2) - 3;
     }
+    console.log(mod(delay, 12));
     setTimeout(this.flagOnOff, mod(delay, 12) * 150, bool);
   }
 

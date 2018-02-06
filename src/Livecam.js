@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { timeConverter } from "./utils";
 import "./livecam.css";
 import loader from "./loading.gif";
 
@@ -25,7 +24,7 @@ class Livecam extends Component {
         />
         <p>
           {livecam.city} / {livecam.country} <br />
-          {timeConverter(livecam.time)}
+          {livecam.time}
         </p>
       </div>
     ));

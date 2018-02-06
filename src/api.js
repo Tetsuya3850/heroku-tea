@@ -1,5 +1,10 @@
 import { livecamSeed, livecamOffset } from "./livecamSeed";
-import { calcLocalOffset } from "./utils";
+import {
+  calcLocalOffset,
+  timeConverter,
+  localHourGetter,
+  most_frequent
+} from "./utils";
 import openSocket from "socket.io-client";
 const socket = openSocket("https://flag-tea.herokuapp.com/");
 
@@ -18,17 +23,22 @@ export async function liveCamSearch(cb, hour) {
     const json = await response.json();
     const localOffset = calcLocalOffset();
     const livecams = [];
+    const hours = [];
     json.result.webcams.forEach(function(webcam) {
+      const local_time =
+        webcam.image.update + livecamOffset[hour] - localOffset;
+      const local_hour = localHourGetter(local_time);
       const livecam = {
         id: webcam.id,
         city: webcam.location.city,
         country: webcam.location.country,
         title: webcam.title,
-        time: webcam.image.update + livecamOffset[hour] - localOffset
+        time: timeConverter(local_time)
       };
       livecams.push(livecam);
+      hours.push(local_hour);
     });
-    cb(livecams);
+    cb(livecams, most_frequent(hours));
   } catch (err) {
     console.log(err);
   }
