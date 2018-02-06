@@ -79,7 +79,7 @@ class LivecamContainer extends Component {
   delayFlag(bool) {
     let delay = null;
     if (bool === "1") {
-      delay = 2 - this.state.lHour / 2;
+      delay = 2.5 - this.state.lHour / 2;
     } else {
       delay = 9 - this.state.lHour / 2;
     }
