@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { liveCamSearch, showCam, subscribeToFlag } from "./api";
 import Livecam from "./Livecam";
+import { getHours, mod } from "./utils";
 
 class LivecamContainer extends Component {
   constructor(props) {
@@ -59,7 +60,15 @@ class LivecamContainer extends Component {
   }
 
   delayFlag(bool) {
-    setTimeout(this.flagOnOff, this.props.match.params.hour * 150, bool);
+    let delay = null;
+    const japan_hours = Math.floor(getHours() / 2);
+    const hour = parseInt(this.props.match.params.hour, 10);
+    if (bool === "1") {
+      delay = 2 - japan_hours + hour;
+    } else {
+      delay = 8 - japan_hours + hour;
+    }
+    setTimeout(this.flagOnOff, mod(delay, 12) * 150, bool);
   }
 
   reload() {

@@ -35,7 +35,11 @@ export function calcLocalOffset() {
   return parseInt(tz, 10) * 36;
 }
 
-export function getMinutes() {
+export function getHours() {
   const d = new Date();
-  return d.getMinutes();
+  return d.getHours();
+}
+
+export function mod(n, m) {
+  return (n % m + m) % m;
 }
