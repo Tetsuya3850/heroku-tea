@@ -67,7 +67,7 @@ class LivecamContainer extends Component {
       delay = Math.floor(this.state.lHour / 2) - 3;
     }
     console.log(mod(delay, 12));
-    setTimeout(this.flagOnOff, mod(delay, 12) * 150, bool);
+    setTimeout(this.flagOnOff, mod(delay, 12) * 300, bool);
   }
 
   reload() {
