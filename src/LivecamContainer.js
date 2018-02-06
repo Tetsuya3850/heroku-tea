@@ -64,14 +64,10 @@ class LivecamContainer extends Component {
     if (bool === "1") {
       delay = 2 - this.state.lHour / 2;
     } else {
-      delay = this.state.lHour / 2 - 3;
+      delay = 9 - this.state.lHour / 2;
     }
     if (this.props.match.params.hour === "12") {
-      if (delay < 0) {
-        delay += 1;
-      } else {
-        delay -= 1;
-      }
+      delay += 1;
     }
     console.log(mod(delay, 12));
     setTimeout(this.flagOnOff, mod(delay, 12) * 300, bool);

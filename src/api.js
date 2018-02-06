@@ -38,7 +38,8 @@ export async function liveCamSearch(cb, hour) {
       livecams.push(livecam);
       hours.push(local_hour);
     });
-
+    console.log(hours);
+    console.log(most_frequent(hours));
     cb(livecams, most_frequent(hours));
   } catch (err) {
     console.log(err);
