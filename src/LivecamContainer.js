@@ -62,9 +62,16 @@ class LivecamContainer extends Component {
   delayFlag(bool) {
     let delay = null;
     if (bool === "1") {
-      delay = 2 - Math.floor(this.state.lHour / 2);
+      delay = 2 - this.state.lHour / 2;
     } else {
-      delay = Math.floor(this.state.lHour / 2) - 3;
+      delay = this.state.lHour / 2 - 3;
+    }
+    if (this.props.match.params.hour === "12") {
+      if (delay < 0) {
+        delay += 1;
+      } else {
+        delay -= 1;
+      }
     }
     console.log(mod(delay, 12));
     setTimeout(this.flagOnOff, mod(delay, 12) * 300, bool);
