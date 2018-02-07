@@ -19,9 +19,6 @@ class LivecamContainer extends Component {
     liveCamSearch((livecams, lHour) => {
       this.setState({ loading: false, livecams, lHour });
     }, this.props.match.params.hour);
-    document.ontouchmove = function(event) {
-      event.preventDefault();
-    };
   }
 
   componentDidUpdate() {
