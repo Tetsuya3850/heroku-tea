@@ -83,7 +83,7 @@ class LivecamContainer extends Component {
     if (this.props.match.params.hour === "12") {
       delay += 1;
     }
-    setTimeout(this.flagOnOff, mod(delay, 12) * 300, bool);
+    setTimeout(this.flagOnOff, mod(delay, 12) * 350, bool);
   }
 
   reload() {
