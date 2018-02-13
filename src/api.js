@@ -1,10 +1,5 @@
 import { livecamSeed, livecamOffset } from "./livecamSeed";
-import {
-  calcLocalOffset,
-  timeConverter,
-  localHourGetter,
-  most_frequent
-} from "./utils";
+import { calcLocalOffset, timeConverter, localHourGetter } from "./utils";
 import openSocket from "socket.io-client";
 
 export async function liveCamSearch(cb, hour) {
@@ -22,22 +17,37 @@ export async function liveCamSearch(cb, hour) {
     const json = await response.json();
     const localOffset = calcLocalOffset();
     const livecams = [];
-    const hours = [];
-    json.result.webcams.forEach(function(webcam) {
+    let max_local_time = 0;
+
+    for (const webcam of json.result.webcams) {
+      const weather = await fetch(
+        `http://weathernews.jp/api/api_obs.cgi?lat=${
+          webcam.location.latitude
+        }&lon=${webcam.location.longitude}`
+      );
+      const weather_json = await weather.json();
+      if (weather_json.observation.WX > 400) {
+        weather_json.observation.WX = 200;
+      }
       const local_time =
         webcam.image.update + livecamOffset[hour] - localOffset;
-      const local_hour = localHourGetter(local_time);
+      max_local_time = Math.max(local_time, max_local_time);
       const livecam = {
         id: webcam.id,
         city: webcam.location.city,
         country: webcam.location.country,
         title: webcam.title,
-        time: timeConverter(local_time)
+        time: timeConverter(local_time),
+        weather: weather_json.observation.WX,
+        temp: weather_json.observation.AIRTMP + " °C"
       };
+      const latency = Date.now() - webcam.image.update * 1000;
+      if (latency > 7200000) {
+        livecam.temp = "--- °C";
+      }
       livecams.push(livecam);
-      hours.push(local_hour);
-    });
-    cb(livecams, most_frequent(hours));
+    }
+    cb(livecams, localHourGetter(max_local_time));
   } catch (err) {
     console.log(err);
   }

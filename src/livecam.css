@@ -24,10 +24,24 @@ figure#slideshow div {
   width: 100%;
   height: auto;
   opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 figure#slideshow div img {
   width: 100%;
   clip-path: polygon(0% 10%, 100% 10%, 100% 88%, 0% 88%);
+}
+figure#slideshow div span {
+  position: absolute;
+  width: 90px;
+  top: 12%;
+  text-align: center;
+  z-index: 200;
+  text-shadow: 2px 2px 4px #000000;
+}
+figure#slideshow div span img {
+  vertical-align: middle;
 }
 figure#slideshow div p {
   position: absolute;

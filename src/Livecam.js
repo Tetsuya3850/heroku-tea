@@ -22,6 +22,9 @@ class Livecam extends Component {
           src={`https://images.webcams.travel/preview/${livecam.id}.jpg`}
           alt={livecam.title}
         />
+        <span>
+          <img src={require(`./${livecam.weather}.png`)} /> {livecam.temp}
+        </span>
         <p>
           {livecam.city} / {livecam.country} <br />
           {livecam.time}

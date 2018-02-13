@@ -25,6 +25,18 @@ export function timeConverter(timestamp) {
   return time;
 }
 
+/*
+export function latencyConverter(timestamp) {
+  if (timestamp > 86400000) {
+    return "";
+  } else if (timestamp > 3600000) {
+    return ` (${Math.ceil(timestamp / 3600000)} hr ago)`;
+  } else {
+    return ` (${Math.ceil(timestamp / 60000)} min ago)`;
+  }
+}
+*/
+
 export function localHourGetter(timestamp) {
   if (timestamp === 0) {
     return false;
@@ -57,6 +69,7 @@ export function mod(n, m) {
   return (n % m + m) % m;
 }
 
+/*
 export function most_frequent(array) {
   if (array.length === 0) return null;
   var counts = {};
@@ -76,3 +89,4 @@ export function most_frequent(array) {
   }
   return mostFrequent;
 }
+*/
