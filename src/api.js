@@ -21,7 +21,7 @@ export async function liveCamSearch(cb, hour) {
 
     for (const webcam of json.result.webcams) {
       const weather = await fetch(
-        `http://weathernews.jp/api/api_obs.cgi?lat=${
+        `https://weathernews.jp/api/api_obs.cgi?lat=${
           webcam.location.latitude
         }&lon=${webcam.location.longitude}`
       );
