@@ -20,13 +20,23 @@ export async function liveCamSearch(cb, hour) {
     let max_local_time = 0;
 
     for (const webcam of json.result.webcams) {
-      const weather = await fetch(
+      let weather = await fetch(
         `https://weathernews.jp/api/api_obs.cgi?lat=${
           webcam.location.latitude
         }&lon=${webcam.location.longitude}`
       );
-      const weather_json = await weather.json();
-      if (weather_json.observation.WX > 400) {
+      let weather_json;
+      try {
+        weather_json = await weather.json();
+      } catch (e) {
+        weather = `{"refpt": {"areacode": "","lat": "","lon": "","dist": "","cc": "","country": "","ename": "","lname": "","tz": ""},"observation": {"ISSUE": "","WX": 200,"WX.en_US": "","AIRTMP": "","ARPRSS": "","WNDDIR": "","WNDSPD": ""}}`;
+        weather_json = JSON.parse(weather);
+        console.log(weather_json);
+      }
+      if (
+        weather_json.observation.WX > 400 ||
+        weather_json.observation.WX === ""
+      ) {
         weather_json.observation.WX = 200;
       }
       const local_time =
@@ -42,7 +52,7 @@ export async function liveCamSearch(cb, hour) {
         temp: weather_json.observation.AIRTMP + " °C"
       };
       const latency = Date.now() - webcam.image.update * 1000;
-      if (latency > 7200000) {
+      if (latency > 7200000 || livecam.temp === " °C") {
         livecam.temp = "--- °C";
       }
       livecams.push(livecam);
